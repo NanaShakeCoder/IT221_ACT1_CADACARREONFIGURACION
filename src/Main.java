@@ -1,33 +1,52 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
         String filePath = "src\\DataSet.csv";
-        String line = "";
+        String line;
         try {
             BufferedReader br = new BufferedReader(new FileReader(filePath));
             while ((line = br.readLine()) != null) {
-                String[] row = line.split(",");
-                for(int i = 0; i <= 7; i++) {
+                ArrayList<String> row = getStrings(line);
 
-                        System.out.printf("%-20s", row[i]);
+                for (String field : row) {
+                    System.out.printf("%-20s", field.length() < 20 ? field : field.substring(0, 19));
                 }
                 System.out.println();
             }
         }catch (Exception e) {
-
+            System.out.println();
+            System.out.println(e.getMessage());
         }
 
         System.out.println("\n\nWelcome to the MangaHub");
-        System.out.println("What would you like to do?" +
-                "A. Show the list of available manga\n" +
-                "B. Search for a specific manga\n" +
-                "C. Suggest a manga\n" +
-                "D. Show overall MangaHub statistics\n");
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
+        System.out.println("""
+                What would you like to do?
+                A. Show the list of available manga
+                B. Search for a specific manga
+                C. Suggest a manga
+                D. Show overall MangaHub statistics
+                """);
+    }
+
+    private static ArrayList<String> getStrings(String line) {
+        ArrayList<String> row = new ArrayList<>();
+        boolean inQuotes = false;
+        StringBuilder currentField = new StringBuilder();
+
+        for (char c : line.toCharArray()) {
+            if (c == '"') {
+                inQuotes = !inQuotes;
+            } else if (c == ',' && !inQuotes) {
+                row.add(currentField.toString());
+                currentField.setLength(0);
+            } else {
+                currentField.append(c);
+            }
+        }
+        row.add(currentField.toString());
+        return row;
     }
 }

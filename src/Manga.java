@@ -81,4 +81,8 @@ public class Manga {
     }
     //METHODS
 
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

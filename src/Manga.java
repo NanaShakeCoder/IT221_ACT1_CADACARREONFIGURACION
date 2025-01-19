@@ -2,7 +2,7 @@ public class Manga {
     private String title;
     private String status;
     private String demographics;
-    private int score;
+    private Double score;
     private int members;
     private int votes;
     private int popularity;
@@ -11,23 +11,23 @@ public class Manga {
     //CONSTRUCTORS
     public Manga (){
         this.title = "";
-        this.status = "";
-        this.demographics = "";
-        this.score = 0;
-        this.members = 0;
+        this.score = 0.0;
         this.votes = 0;
         this.popularity = 0;
+        this.members = 0;
         this.favorites = 0;
+        this.status = "";
+        this.demographics = "";
     }
-    public Manga(String name, String sts, String dem, int scr, int mem, int vot, int pop, int fav) {
+    public Manga(String name, Double scr, int vot, int pop, int mem, int fav, String sts, String dem) {
         this.title = name;
-        this.status = sts;
-        this.demographics = dem;
         this.score = scr;
-        this.members = mem;
         this.votes = vot;
         this.popularity = pop;
+        this.members = mem;
         this.favorites = fav;
+        this.status = sts;
+        this.demographics = dem;
     }
     //SETTERS
     public void setTitle(String title) {
@@ -39,7 +39,7 @@ public class Manga {
     public void setDemographics(String demographics) {
         this.demographics = demographics;
     }
-    public void setScore(int score) {
+    public void setScore(Double score) {
         this.score = score;
     }
     public void setMembers(int members) {
@@ -64,7 +64,7 @@ public class Manga {
     public String getDemographics() {
         return demographics;
     }
-    public int getScore() {
+    public Double getScore() {
         return score;
     }
     public int getMembers() {
@@ -83,6 +83,7 @@ public class Manga {
 
     @Override
     public String toString() {
-        return super.toString();
+
+        return String.format("%-20s %-20s %-20s %-20s %-20s %-20s %-20s %-20s", this.title, this.score, this.votes, this.popularity, this.members, this.favorites, this.status, this.demographics);
     }
 }

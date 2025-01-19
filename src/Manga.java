@@ -8,6 +8,7 @@ public class Manga {
     private int popularity;
     private int favorites;
 
+    //CONSTRUCTORS
     public Manga (){
         this.title = "";
         this.status = "";
@@ -18,6 +19,17 @@ public class Manga {
         this.popularity = 0;
         this.favorites = 0;
     }
+    public Manga(String name, String sts, String dem, int scr, int mem, int vot, int pop, int fav) {
+        this.title = name;
+        this.status = sts;
+        this.demographics = dem;
+        this.score = scr;
+        this.members = mem;
+        this.votes = vot;
+        this.popularity = pop;
+        this.favorites = fav;
+    }
+    //SETTERS
     public void setTitle(String title) {
         this.title = title;
     }
@@ -42,4 +54,31 @@ public class Manga {
     public void setFavorites(int favorites) {
         this.favorites = favorites;
     }
+    //GETTERS
+    public String getTitle() {
+        return title;
+    }
+    public String getStatus() {
+        return status;
+    }
+    public String getDemographics() {
+        return demographics;
+    }
+    public int getScore() {
+        return score;
+    }
+    public int getMembers() {
+        return members;
+    }
+    public int getVotes() {
+        return votes;
+    }
+    public int getPopularity() {
+        return popularity;
+    }
+    public int getFavorites() {
+        return favorites;
+    }
+    //METHODS
+
 }

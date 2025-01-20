@@ -24,10 +24,8 @@ Methods:
 Show list of Manga:
 a. Alphabetically
 b. By Score (Highest to Lowest)
-
-Filter list:
-a. By Status (Publishing, Discontinued, Finished, On Hiatus)
-b. By Demographic (Shounen, Seinen. Josei, Shoujo, Kids)
+c. By Status (Publishing, Discontinued, Finished, On Hiatus)
+d. By Demographic (Shounen, Seinen. Josei, Shoujo, Kids)
 
 C. Search Manga
 

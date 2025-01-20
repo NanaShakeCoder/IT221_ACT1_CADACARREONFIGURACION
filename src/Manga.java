@@ -83,10 +83,7 @@ public class Manga {
 
     @Override
     public String toString() {
-        if (this.title.length() < 20){
-            return String.format("%-20s %-20s %-20s %-20s %-20s %-20s %-20s %-20s", this.title, this.score, this.votes, this.popularity, this.members, this.favorites, this.status, this.demographics);
-        } else {
-            return String.format("%-20s %-20s %-20s %-20s %-20s %-20s %-20s %-20s", this.title.substring(0,19), this.score, this.votes, this.popularity, this.members, this.favorites, this.status, this.demographics);
-        }
+
+        return String.format("%-20s %-20s %-20s %-20s %-20s %-20s %-20s %-20s", this.title, this.score, this.votes, this.popularity, this.members, this.favorites, this.status, this.demographics);
     }
 }

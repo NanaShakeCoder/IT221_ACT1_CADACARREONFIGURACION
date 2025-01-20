@@ -24,20 +24,20 @@ Methods:
 Show list of Manga:
 a. Alphabetically
 b. By Score (Highest to Lowest)
-c. By Status (Publishing, Discontinued, Finished, On Hiatus)
-d. By Demographic (Shounen, Seinen. Josei, Shoujo, Kids)
+c. By Popularity (Highest to Lowest)
+d. By Amount of Members (Highest to Lowest)
+e. By Number of Votes (Highest to Lowest)
+f. By Number of Favorites (Highest to Lowest)
 
 C. Search Manga
 
-D. Suggest Manga:
-a. By Popularity
-b. By Amount of Members
-c. By Number of Votes
-d. By Number of Favorites
+D. Filter:
+c. By Status (Publishing, Discontinued, Finished, On Hiatus)
+d. By Demographic (Shounen, Seinen. Josei, Shoujo, Kids)
 
-E. Show Overall Manga List Statistics (MAX, AVE, MIN):
-a. Popularity
-b. Members
-c. Votes
-d. Favorites
-e. Score
+E. Suggest manga (MAX, AVE, MIN):
+a. Popularity (Top 10 Most Popular Manga)
+b. Members (Top 10 Manga With the Most Active Followers)
+c. Votes (Top 10 Highly Voted Manga)
+d. Favorites (Top 10 Favorite Manga)
+e. Score (Top 10 Highly Scored Manga)

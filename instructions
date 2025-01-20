@@ -1,0 +1,45 @@
+(Sort, Filter, Search, Aggregate)
+
+1. Sort by:
+a. Name
+b. Score
+
+2. Filter by:
+a. Status
+b. Demographics
+
+3. Search Name
+
+4. Aggregation (Maximum, Averages, Minimum)
+a. By Popularity
+b. By Members
+c. By Votes
+d. By Favorites
+
+
+
+
+Methods:
+
+Show list of Manga:
+a. Alphabetically
+b. By Score (Highest to Lowest)
+
+Filter list:
+a. By Status (Publishing, Discontinued, Finished, On Hiatus)
+b. By Demographic (Shounen, Seinen. Josei, Shoujo, Kids)
+
+C. Search Manga
+
+D. Suggest Manga:
+a. By Popularity
+b. By Amount of Members
+c. By Number of Votes
+d. By Number of Favorites
+
+E. Show Overall Manga List Statistics (MAX, AVE, MIN):
+a. Popularity
+b. Members
+c. Votes
+d. Favorites
+e. Score

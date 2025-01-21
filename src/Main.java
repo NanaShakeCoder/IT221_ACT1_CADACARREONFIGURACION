@@ -2,8 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     static ArrayList<Manga> mangaList = new ArrayList<>();
@@ -12,6 +11,7 @@ public class Main {
     static String filePath = "src\\DataSet.csv";
     static String line;
     static BufferedReader br;
+
     static {
         try {
             br = new BufferedReader(new FileReader(filePath));
@@ -19,6 +19,7 @@ public class Main {
             throw new RuntimeException(e);
         }
     }
+
     static int counter = 0;
 
     public static void main(String[] args) throws IOException {
@@ -27,6 +28,7 @@ public class Main {
         displayMenu();
 
     }
+
     //DISPLAY MAIN MENU
     public static void displayMenu() {
         Scanner scn = new Scanner(System.in);
@@ -49,16 +51,16 @@ public class Main {
                 String chc2 = scn.nextLine();
                 while (!stop) {
                     switch (chc2) {
-                        case "a":;
+                        case "a":
+                            ;
                         case "A":
-                            while (!stop){
+                            while (!stop) {
                                 searchManga();
                                 System.out.print("Would you like to search for another manga: (Y/N)");
                                 String chc3 = scn.nextLine();
                                 if (chc3.equals("Y") || chc3.equals("y")) {
                                     searchManga();
-                                }
-                                else if (chc3.equals("N") ||chc3.equals("n")) {
+                                } else if (chc3.equals("N") || chc3.equals("n")) {
                                     stop = true;
                                 } else {
                                     System.out.println("That is not a valid option, please select again: Y/N");
@@ -66,13 +68,24 @@ public class Main {
                                 }
                             }
                             break;
-                        case "b":;
-                        case "B":;
-                        case "c":;
-                        case "C":;
-                        case "d":;
-                        case "D":;
-                        case "e":;
+                        case "b":
+                            ;
+                        case "B":
+                            ;
+                        case "c":
+                            ;
+                        case "C":
+                            suggestManga();
+                            stop = true;
+                            break;
+                        case "d":
+                            ;
+                        case "D":
+                            showTop10s();
+                            stop = true;
+                            break;
+                        case "e":
+                            ;
                         case "E":
                             System.exit(0);
                             break;
@@ -95,7 +108,8 @@ public class Main {
         line = br.readLine();
         header = line.split("@");
     }
-    public static void displayHeader(){
+
+    public static void displayHeader() {
         System.out.printf("%-20s %-20s %-20s %-20s %-20s %-20s %-20s %-20s", header[0], header[1], header[2], header[3], header[4], header[5], header[6], header[7]);
         System.out.println();
     }
@@ -114,12 +128,14 @@ public class Main {
 
         }
     }
+
     public static void displayList() {
         displayHeader();
         for (Manga manga : mangaList) {
             System.out.println(manga);
         }
     }
+
     public static void searchManga() {
         Scanner scnr = new Scanner(System.in);
         System.out.println("Input manga title here: ");
@@ -140,4 +156,67 @@ public class Main {
         System.out.println("Found " + counter + " manga");
         counter = 0;
     }
+
+    public static void suggestManga() {
+        Random rand = new Random();
+        System.out.println(" Here are 5 manga suggestions for you:");
+        displayHeader();
+        HashSet<Integer> indices = new HashSet<>();
+
+        while (indices.size() < 5 && indices.size() < mangaList.size()) {
+            indices.add(rand.nextInt(mangaList.size()));
+        }
+
+        for (int index : indices) {
+            System.out.println(mangaList.get(index));
+        }
+    }
+
+    public static void showTop10s() {
+        List<Manga> topByScore = new ArrayList<>(mangaList);
+        topByScore.sort((m1, m2) -> Double.compare(m2.getScore(), m1.getScore()));
+
+        List<Manga> topByVote = new ArrayList<>(mangaList);
+        topByVote.sort((m1, m2) -> Integer.compare(m2.getVotes(), m1.getVotes()));
+
+        List<Manga> topByPopularity = new ArrayList<>(mangaList);
+        topByPopularity.sort((m1, m2) -> Integer.compare(m2.getPopularity(), m1.getPopularity()));
+
+        List<Manga> topByMembers = new ArrayList<>(mangaList);
+        topByMembers.sort((m1, m2) -> Integer.compare(m2.getMembers(), m1.getMembers()));
+
+        List<Manga> topByFavorite = new ArrayList<>(mangaList);
+        topByFavorite.sort((m1, m2) -> Integer.compare(m2.getFavorites(), m1.getFavorites()));
+
+        System.out.println(" Top 10 Mangas by Score:");
+        displayHeader();
+        for (int i = 0; i < 10 && i < topByScore.size(); i++) {
+            System.out.println(topByScore.get(i));
+        }
+
+        System.out.println("\n Top 10 Mangas by Vote:");
+        displayHeader();
+        for (int i = 0; i < 10 && i < topByVote.size(); i++) {
+            System.out.println(topByVote.get(i));
+        }
+
+        System.out.println("\n Top 10 Mangas by Popularity:");
+        displayHeader();
+        for (int i = 0; i < 10 && i < topByPopularity.size(); i++) {
+            System.out.println(topByPopularity.get(i));
+        }
+
+        System.out.println("\n Top 10 Mangas by Members:");
+        displayHeader();
+        for (int i = 0; i < 10 && i < topByMembers.size(); i++) {
+            System.out.println(topByMembers.get(i));
+        }
+
+        System.out.println("\n Top 10 Mangas by Favorite:");
+        displayHeader();
+        for (int i = 0; i < 10 && i < topByFavorite.size(); i++) {
+            System.out.println(topByFavorite.get(i));
+        }
+    }
+
 }

@@ -285,6 +285,7 @@ public class Main {
                     D. By Amount of Members (Highest to Lowest)
                     E. By Number of Votes (Highest to Lowest)
                     F. By Number of Favorites (Highest to Lowest)
+                    G. Return to Main Menu
                     Please Select an Option: """);
             String sortOption = scn.nextLine();
 

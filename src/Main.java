@@ -116,15 +116,13 @@ public class Main {
                         case "B":
                             ;
                         case "c":
-                            ;
                         case "C":
                             suggestManga();
                             stop = true;
                             break;
                         case "d":
-                            ;
                         case "D":
-                            showTop10s();
+                            showTop10sMenu(scn);
                             stop = true;
                             break;
                         case "e":
@@ -215,50 +213,64 @@ public class Main {
         }
     }
 
-    public static void showTop10s() {
-        List<Manga> topByScore = new ArrayList<>(mangaList);
-        topByScore.sort((m1, m2) -> Double.compare(m2.getScore(), m1.getScore()));
+    public static void showTop10sMenu(Scanner scn) {
+        System.out.println("\nWhat category would you like to see the top 10 mangas by?");
+        System.out.println("1. Score");
+        System.out.println("2. Vote");
+        System.out.println("3. Popularity");
+        System.out.println("4. Members");
+        System.out.println("5. Favorite");
+        System.out.print("Please select an option: ");
 
-        List<Manga> topByVote = new ArrayList<>(mangaList);
-        topByVote.sort((m1, m2) -> Integer.compare(m2.getVotes(), m1.getVotes()));
+        String choice = scn.nextLine();
 
-        List<Manga> topByPopularity = new ArrayList<>(mangaList);
-        topByPopularity.sort((m1, m2) -> Integer.compare(m2.getPopularity(), m1.getPopularity()));
+        switch (choice) {
+            case "1":
+                showTop10s("Score");
+                break;
+            case "2":
+                showTop10s("Vote");
+                break;
+            case "3":
+                showTop10s("Popularity");
+                break;
+            case "4":
+                showTop10s("Members");
+                break;
+            case "5":
+                showTop10s("Favorite");
+                break;
+            default:
+                System.out.println("Invalid choice. Returning to menu.");
+                break;
+        }
+    }
 
-        List<Manga> topByMembers = new ArrayList<>(mangaList);
-        topByMembers.sort((m1, m2) -> Integer.compare(m2.getMembers(), m1.getMembers()));
+    public static void showTop10s(String category) {
+        List<Manga> sortedList = new ArrayList<>(mangaList);
 
-        List<Manga> topByFavorite = new ArrayList<>(mangaList);
-        topByFavorite.sort((m1, m2) -> Integer.compare(m2.getFavorites(), m1.getFavorites()));
-
-        System.out.println(" Top 10 Mangas by Score:");
-        displayHeader();
-        for (int i = 0; i < 10 && i < topByScore.size(); i++) {
-            System.out.println(topByScore.get(i));
+        switch (category) {
+            case "Score":
+                sortedList.sort((m1, m2) -> Double.compare(m2.getScore(), m1.getScore()));
+                break;
+            case "Vote":
+                sortedList.sort((m1, m2) -> Integer.compare(m2.getVotes(), m1.getVotes()));
+                break;
+            case "Popularity":
+                sortedList.sort((m1, m2) -> Integer.compare(m2.getPopularity(), m1.getPopularity()));
+                break;
+            case "Members":
+                sortedList.sort((m1, m2) -> Integer.compare(m2.getMembers(), m1.getMembers()));
+                break;
+            case "Favorite":
+                sortedList.sort((m1, m2) -> Integer.compare(m2.getFavorites(), m1.getFavorites()));
+                break;
         }
 
-        System.out.println("\n Top 10 Mangas by Vote:");
+        System.out.println("\nTop 10 Mangas by " + category + ":");
         displayHeader();
-        for (int i = 0; i < 10 && i < topByVote.size(); i++) {
-            System.out.println(topByVote.get(i));
-        }
-
-        System.out.println("\n Top 10 Mangas by Popularity:");
-        displayHeader();
-        for (int i = 0; i < 10 && i < topByPopularity.size(); i++) {
-            System.out.println(topByPopularity.get(i));
-        }
-
-        System.out.println("\n Top 10 Mangas by Members:");
-        displayHeader();
-        for (int i = 0; i < 10 && i < topByMembers.size(); i++) {
-            System.out.println(topByMembers.get(i));
-        }
-
-        System.out.println("\n Top 10 Mangas by Favorite:");
-        displayHeader();
-        for (int i = 0; i < 10 && i < topByFavorite.size(); i++) {
-            System.out.println(topByFavorite.get(i));
+        for (int i = 0; i < 10 && i < sortedList.size(); i++) {
+            System.out.println(sortedList.get(i));
         }
     }
     public static void sortManga() {
@@ -341,6 +353,5 @@ public class Main {
     public static void sortMangaByFavorites() {
         mangaList.sort((m1, m2) -> Integer.compare(m2.getFavorites(), m1.getFavorites()));
     }
-
 }
 

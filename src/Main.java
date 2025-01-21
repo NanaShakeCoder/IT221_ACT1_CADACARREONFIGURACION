@@ -218,5 +218,73 @@ public class Main {
             System.out.println(topByFavorite.get(i));
         }
     }
+    public static void sortManga() {
+        Scanner scn = new Scanner(System.in);
+        System.out.println("""
+                How would you like to sort the manga list?
+                A. Alphabetically
+                B. By Score (Highest to Lowest)
+                C. By Popularity (Highest to Lowest)
+                D. By Amount of Members (Highest to Lowest)
+                E. By Number of Votes (Highest to Lowest)
+                F. By Number of Favorites (Highest to Lowest)
+                Please Select an Option: """);
+        String sortOption = scn.nextLine();
 
+        switch (sortOption) {
+            case "a":
+            case "A":
+                sortMangaAlphabetically();
+                break;
+            case "b":
+            case "B":
+                sortMangaByScore();
+                break;
+            case "c":
+            case "C":
+                sortMangaByPopularity();
+                break;
+            case "d":
+            case "D":
+                sortMangaByMembers();
+                break;
+            case "e":
+            case "E":
+                sortMangaByVotes();
+                break;
+            case "f":
+            case "F":
+                sortMangaByFavorites();
+                break;
+            default:
+                System.out.println("Invalid option. Returning to main menu.");
+        }
+
+        Main.displayList();
+    }
+
+    public static void sortMangaAlphabetically() {
+        Main.mangaList.sort(Comparator.comparing(Manga::getTitle));
+    }
+
+    public static void sortMangaByScore() {
+        Main.mangaList.sort((m1, m2) -> Double.compare(m2.getScore(), m1.getScore()));
+    }
+
+    public static void sortMangaByPopularity() {
+        Main.mangaList.sort((m1, m2) -> Integer.compare(m2.getPopularity(), m1.getPopularity()));
+    }
+
+    public static void sortMangaByMembers() {
+        Main.mangaList.sort((m1, m2) -> Integer.compare(m2.getMembers(), m1.getMembers()));
+    }
+
+    public static void sortMangaByVotes() {
+        Main.mangaList.sort((m1, m2) -> Integer.compare(m2.getVotes(), m1.getVotes()));
+    }
+
+    public static void sortMangaByFavorites() {
+        Main.mangaList.sort((m1, m2) -> Integer.compare(m2.getFavorites(), m1.getFavorites()));
+    }
 }
+

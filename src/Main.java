@@ -311,9 +311,9 @@ public class Main {
                 case "g":
                 case "G":
                     displayMenu();
-                    return;
+                    return; // return to main menu
                 default:
-                    System.out.println("Invalid option. Returning to main menu.");
+                    System.out.println("Invalid option. Please select again: (A/B/C/D/E/F/G)");
             }
         }
         Main.displayList();

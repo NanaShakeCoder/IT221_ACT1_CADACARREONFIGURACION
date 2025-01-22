@@ -81,7 +81,7 @@ public class Main {
                         \nWhat would you like to do next?
                         A. Search for a specific manga
                         B. Sort Manga
-                        C. Suggest a manga
+                        C. Suggest 5 mangas
                         D. Show Top 10s
                         E. Exit Program
                         Please Select an Option:

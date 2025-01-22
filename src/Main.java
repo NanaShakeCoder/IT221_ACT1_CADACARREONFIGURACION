@@ -1,3 +1,13 @@
+/*
+INITIAL DOCUMENTATION
+
+This program provides a way to manage a csv file containing raw data about a manga list. The csv file is delimited by an @ symbol and is separated into 8 columns. These
+columns contain the manga's title, score, vote, popularity, members, favorites, status, and demographics. The program will have 7 main functions that are displayed on a
+menu which will help the user  navigate the program. These functions are displaying the unprocessed list of manga, searching for a manga that contains the keyword, sorting
+the manga list, suggesting a manga, filtering the list of manga for a specific keyword, showing the top 10 manga per category. Some of these functions, such as sorting the
+manga list, also have submenu for more specific functions like sorting alphabetically.
+ */
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -6,10 +16,11 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Main {
+    //This is where the initialization and declaration of the commonly used variables are found
     static ArrayList<Manga> mangaList = new ArrayList<>();
     static String[] rows = new String[8];
     static String[] header = new String[8];
-    static String filePath = "src\\DataSet.csv";
+    static String filePath = "src\\CadaGabrielCarreonZhakFiguracionJacob.csv";
     static String line;
     static BufferedReader br;
     static {
@@ -20,13 +31,16 @@ public class Main {
         }
     }
     static int counter = 0;
-    
+
+    //This is where the program starts. The main method calls these methods to ready the list and to display the menu.
+    //The readHeader() method is only there to read the first line of csv file
     public static void main(String[] args) throws IOException {
         readHeader();
         populateList();
         displayMenu();
     }
-    //DISPLAY MAIN MENU
+    //This method displays the main menu of the program and also the banner for the console-based UI
+    //It also handles the different cases for each choice the user makes, while other functions also do that for their submenus
     public static void displayMenu() {
         Scanner scn = new Scanner(System.in);
         //MAIN MENU
@@ -73,13 +87,15 @@ public class Main {
         System.out.print("Would you like to see the list of available mangas: (Y/N)");
         String chc = scn.nextLine();
         boolean stop = false;
+        //This is where the user choices are handled. It is handled by a while loop and nested if, switch, and while statements.
+        //The looping of the while statements are handled by their own boolean variables to prevent confusion.
         while (!stop) {
             if (chc.equals("Y") || chc.equals("y")) {
                 displayList();
                 System.out.println("===================================================================================================================================================================");
                 System.out.print("""
                         What would you like to do next?
-                        A. Search for a specific manga
+                        A. Search for a manga
                         B. Sort Manga
                         C. Suggest 5 manga
                         D. Filter
@@ -166,7 +182,7 @@ public class Main {
             }
         }
     }
-
+    //This portion of the program handles the repetitive query if the user chooses to use a function again such as asking the user if they want to search for a manga again
     public static boolean repeatingQuestion(Scanner scn, boolean stop2, boolean stop3, String chc3) {
         while(!stop3){
             if (chc3.equals("Y") || chc3.equals("y")) {
@@ -183,16 +199,18 @@ public class Main {
         }
         return stop2;
     }
+    //This method reads the first line of the csv file so that it can head straight to the main data of the csv file
     public static void readHeader() throws IOException {
         line = br.readLine();
         header = line.split("@");
     }
+    //This method displays the now read header so that each display of a list can have a header
     public static void displayHeader(){
         System.out.println("===================================================================================================================================================================");
         System.out.printf("%-20s %-20s %-20s %-20s %-20s %-20s %-20s %-20s", header[0], header[1], header[2], header[3], header[4], header[5], header[6], header[7]);
         System.out.println();
     }
-
+    //This method populates the manga list
     public static void populateList() throws IOException {
         while ((line = br.readLine()) != null) {
             rows = line.split("@");
@@ -207,12 +225,14 @@ public class Main {
 
         }
     }
+    //This method displays the now read manga list to the user
     public static void displayList() {
         displayHeader();
         for (Manga manga : mangaList) {
             System.out.println(manga);
         }
     }
+    //This method searches and displays the list of manga found in the list that contains the user's search keyword
     public static void searchManga() {
         Scanner scnr = new Scanner(System.in);
         System.out.println("Input manga title here: ");
@@ -224,7 +244,6 @@ public class Main {
                 counter++;
             }
         }
-
         displayHeader();
         for (Integer integer : mangasFound) {
             System.out.println(mangaList.get(integer).toString());
@@ -233,6 +252,7 @@ public class Main {
         System.out.println("Found " + counter + " manga");
         counter = 0;
     }
+    //This method generates random manga suggestion to the user
     public static void suggestManga() {
         Random rand = new Random();
         System.out.println(" Here are 5 manga suggestions for you:");
@@ -246,6 +266,7 @@ public class Main {
             System.out.println(mangaList.get(index));
         }
     }
+    //This method asks the user what top 10 list they want to see based on the category
     public static void showTop10sMenu(Scanner scn) {
         System.out.println("\nWhat category would you like to see the top 10 mangas by?");
         System.out.println("A. Score");
@@ -276,6 +297,7 @@ public class Main {
                 break;
         }
     }
+    //This method displays the top 10 list based on the user's chosen category
     public static void showTop10s(String category) {
         List<Manga> sortedList = new ArrayList<>(mangaList);
         switch (category) {
@@ -301,6 +323,7 @@ public class Main {
             System.out.println(sortedList.get(i));
         }
     }
+    //This method asks the user how they want to sort the manga list
     public static void sortManga() {
         Scanner scn = new Scanner(System.in);
         boolean validOption = false;
@@ -357,6 +380,7 @@ public class Main {
             }
         }
     }
+    //This method sorts the manga alphabetically
     public static void sortMangaAlphabetically() {
         mangaList.sort(Comparator.comparing(m -> m.getTitle().toLowerCase()));
         displayHeader();
@@ -365,6 +389,7 @@ public class Main {
         }
         System.out.println("===================================================================================================================================================================");
     }
+    //This method sorts the manga by score from highest to lowest
     public static void sortMangaByScore() {
         mangaList.sort((m1, m2) -> Double.compare(m2.getScore(), m1.getScore()));
         displayHeader();
@@ -373,6 +398,7 @@ public class Main {
         }
         System.out.println("===================================================================================================================================================================");
     }
+    //This method sorts the manga by popularity from highest to lowest
     public static void sortMangaByPopularity() {
         mangaList.sort((m1, m2) -> Integer.compare(m2.getPopularity(), m1.getPopularity()));
         displayHeader();
@@ -381,6 +407,7 @@ public class Main {
         }
         System.out.println("===================================================================================================================================================================");
     }
+    //This method sorts the manga by the number of members from highest to lowest
     public static void sortMangaByMembers() {
         mangaList.sort((m1, m2) -> Integer.compare(m2.getMembers(), m1.getMembers()));
         displayHeader();
@@ -389,6 +416,7 @@ public class Main {
         }
         System.out.println("===================================================================================================================================================================");
     }
+    //This method sorts the manga by votes from highest to lowest
     public static void sortMangaByVotes() {
         mangaList.sort((m1, m2) -> Integer.compare(m2.getVotes(), m1.getVotes()));
         displayHeader();
@@ -397,6 +425,7 @@ public class Main {
         }
         System.out.println("===================================================================================================================================================================");
     }
+    //This method sorts the manga by the number of users who tagged it as their favorite from highest to lowest
     public static void sortMangaByFavorites() {
         mangaList.sort((m1, m2) -> Integer.compare(m2.getFavorites(), m1.getFavorites()));
         displayHeader();
@@ -405,16 +434,19 @@ public class Main {
         }
         System.out.println("===================================================================================================================================================================");
     }
+    //This method filters the manga by status that was selected by the user
     public static List<Manga> filterMangaByStatus(String status) {
         return mangaList.stream()
                 .filter(manga -> manga.getStatus().equals(status))
                 .collect(Collectors.toList());
     }
+    //This method filters the manga by demographic that was selected by the user
     public static List<Manga> filterMangaByDemographic(String demographic) {
         return mangaList.stream()
                 .filter(manga -> manga.getDemographics().equals(demographic))
                 .collect(Collectors.toList());
     }
+    //This method asks the user how they want to filter the manga list
     public static boolean showFilteredList(String filterChoice) {
         Scanner scnn = new Scanner(System.in);
         boolean llStop = false;
@@ -486,6 +518,7 @@ public class Main {
         }
         return true;
     }
+    //This method displays the list depending on category and subcategory
     private static void displayFilteredList(List<Manga> filteredList) {
         displayHeader();
         for (Manga manga : filteredList) {

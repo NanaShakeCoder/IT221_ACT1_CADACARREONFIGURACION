@@ -20,8 +20,7 @@ public class Main {
         }
     }
     static int counter = 0;
-
-
+    
     public static void main(String[] args) throws IOException {
         readHeader();
         populateList();
@@ -82,7 +81,7 @@ public class Main {
                         What would you like to do next?
                         A. Search for a specific manga
                         B. Sort Manga
-                        C. Suggest a manga
+                        C. Suggest 5 manga
                         D. Filter
                         E. Show Top 10s
                         F. Exit Program
@@ -193,6 +192,7 @@ public class Main {
         System.out.printf("%-20s %-20s %-20s %-20s %-20s %-20s %-20s %-20s", header[0], header[1], header[2], header[3], header[4], header[5], header[6], header[7]);
         System.out.println();
     }
+
     public static void populateList() throws IOException {
         while ((line = br.readLine()) != null) {
             rows = line.split("@");
